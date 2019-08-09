@@ -44,14 +44,18 @@ const titleClickHandler = function(event){
   console.log(articleSelector);
 
 
-  /* [DONE] find the correct article using the selector (value of 'href' attribute) */
+  /* [IN PROGRESS] find the correct article using the selector (value of 'href' attribute) */
 
   const targetArticle = clickedElement.querySelector('.post');
 
   console.log(targetArticle);
 
 
-  /* add class 'active' to the correct article */
+  /* [IN PROGRESS] add class 'active' to the correct article */
+
+  targetArticle.classList.add('active');
+
+  console.log(targetArticle);
 
 }
 
