@@ -46,7 +46,7 @@ const titleClickHandler = function(event){
 
   /* [IN PROGRESS] find the correct article using the selector (value of 'href' attribute) */
 
-  const targetArticle = clickedElement.querySelector('.post');
+  const targetArticle = clickedElement.querySelector(articleSelector);
 
   console.log(targetArticle);
 
