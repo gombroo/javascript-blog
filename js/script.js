@@ -4,16 +4,15 @@
 /* Display article after click */
 /* ------------------------------ */
 
-document.getElementById('test-button').addEventListener('click', function(){
+/* document.getElementById('test-button').addEventListener('click', function(){
   const links = document.querySelectorAll('.titles a');
   console.log('links:', links);
 });
+*/
 
 const titleClickHandler = function(event){
   event.preventDefault();
-  const clickedElement = this;
-  console.log('Link was clicked!');
-
+  const clickedElement = this; // for finding clicked link, 'this' makes possible to refer to this const through the whole function
 
   /* [DONE] remove class 'active' from all article links  */
 
@@ -26,7 +25,6 @@ const titleClickHandler = function(event){
  /* [DONE] add class 'active' to the clicked link */
 
   clickedElement.classList.add('active');
-  console.log('clickedElement:', clickedElement);
 
   /* [DONE] remove class 'active' from all articles */
 
@@ -39,24 +37,14 @@ const titleClickHandler = function(event){
   /* [DONE] get 'href' attribute from the clicked link */
 
   const articleSelector = clickedElement.getAttribute("href");
-  console.log(articleSelector);
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
   const targetArticle = document.querySelector(articleSelector);
-  console.log(targetArticle);
 
   /* [DONE] add class 'active' to the correct article */
 
   targetArticle.classList.add('active');
-  console.log(targetArticle);
-}
-
-const links = document.querySelectorAll('.titles a');
-console.log('links:', links);
-
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
 }
 
 
@@ -72,14 +60,18 @@ function generateTitleLinks(){
 
   /* [DONE] remove contents of titleList */
 
-  clearTitleList();
+  /* clearTitleList();*/
+
+  const clearTitleList = function() {
+    document.querySelector(optTitleListSelector).innerHTML = '';
+  }
 
   const titleList = document.querySelector(optTitleListSelector);
   console.log(titleList);
 
   /* [DONE] for each article - find all the articles and save them to variable: articles */
 
-  const articles = document.querySelectorAll('.post');
+  const articles = document.querySelectorAll(optArticleSelector);
 
 	let html = '';
 
@@ -88,7 +80,6 @@ function generateTitleLinks(){
 		/* [DONE] get the article id */
 
 		const articleId = article.getAttribute("id");
-		console.log(articleId);
 
 		/* [DONE] find the title element */
 		/* [DONE] get the title from the title element */
@@ -104,14 +95,27 @@ function generateTitleLinks(){
 
 		titleList.insertAdjacentHTML('beforeend', linkHTML);
 
+    /* [DONE] insert link into html variable */
+
 		html = html + linkHTML;
     }
 
 	titleList.innerHTML = html;
+
+  // links & eventListener moved here -
+  // it shoud be run AFTER generating list of links, not before
+
+  const links = document.querySelectorAll('.titles a');
+  console.log('links:', links);
+
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
+  }
 }
 
 generateTitleLinks();
 
-function clearTitleList(){
+/* function clearTitleList(){
   document.querySelector(optTitleListSelector).innerHTML = '';
 }
+*/
