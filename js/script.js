@@ -22,7 +22,7 @@ const titleClickHandler = function(event){
     activeLink.classList.remove('active');
   }
 
- /* [DONE] add class 'active' to the clicked link */
+  /* [DONE] add class 'active' to the clicked link */
 
   clickedElement.classList.add('active');
 
@@ -36,7 +36,7 @@ const titleClickHandler = function(event){
 
   /* [DONE] get 'href' attribute from the clicked link */
 
-  const articleSelector = clickedElement.getAttribute("href");
+  const articleSelector = clickedElement.getAttribute('href');
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
@@ -45,7 +45,7 @@ const titleClickHandler = function(event){
   /* [DONE] add class 'active' to the correct article */
 
   targetArticle.classList.add('active');
-}
+};
 
 
 /* ------------------------------ */
@@ -64,7 +64,7 @@ function generateTitleLinks(){
 
   const clearTitleList = function() {
     document.querySelector(optTitleListSelector).innerHTML = '';
-  }
+  };
 
   const titleList = document.querySelector(optTitleListSelector);
   console.log(titleList);
@@ -73,34 +73,34 @@ function generateTitleLinks(){
 
   const articles = document.querySelectorAll(optArticleSelector);
 
-	let html = '';
+  let html = '';
 
-    for(let article of articles){
+  for(let article of articles){
 
-		/* [DONE] get the article id */
+    /* [DONE] get the article id */
 
-		const articleId = article.getAttribute("id");
+    const articleId = article.getAttribute('id');
 
-		/* [DONE] find the title element */
-		/* [DONE] get the title from the title element */
+    /* [DONE] find the title element */
+    /* [DONE] get the title from the title element */
 
-		const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-		/* [DONE] create HTML of the link */
+    /* [DONE] create HTML of the link */
 
-		const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-		console.log(linkHTML);
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log(linkHTML);
 
-		/* [DONE] insert link into html variable - titleList */
+    /* [DONE] insert link into html variable - titleList */
 
-		titleList.insertAdjacentHTML('beforeend', linkHTML);
+    titleList.insertAdjacentHTML('beforeend', linkHTML);
 
     /* [DONE] insert link into html variable */
 
-		html = html + linkHTML;
-    }
+    html = html + linkHTML;
+  }
 
-	titleList.innerHTML = html;
+  titleList.innerHTML = html;
 
   // links & eventListener moved here -
   // it shoud be run AFTER generating list of links, not before
