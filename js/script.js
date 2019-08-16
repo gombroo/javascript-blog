@@ -164,21 +164,20 @@ function generateTags(){
       /* add generated code to html variable */
 
       tagsWrapper.insertAdjacentHTML('beforeend', linkHTML);
-      console.log('Tags wrapper: ', tagsWrapper);
+      console.log('Add code to html variable:', tagsWrapper);
 
       /* END LOOP: for each tag */
 
       html = html + linkHTML;
+      console.log('Czy to działa?');
     }
-
-
 
     /* insert HTML of all the links into the tags wrapper */
 
     tagsWrapper.innerHTML = html;
+    console.log('A to?');
 
     /* END LOOP: for every article: */
-
   }
 }
 
