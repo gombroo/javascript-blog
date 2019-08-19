@@ -61,11 +61,11 @@ function generateTitleLinks(){
 
   /* [DONE] remove contents of titleList */
 
-  /* clearTitleList();*/
-
   const clearTitleList = function() {
     document.querySelector(optTitleListSelector).innerHTML = '';
   };
+
+  clearTitleList();
 
   const titleList = document.querySelector(optTitleListSelector);
   console.log(titleList);
@@ -116,11 +116,6 @@ function generateTitleLinks(){
 
 generateTitleLinks();
 
-/* function clearTitleList(){
-  document.querySelector(optTitleListSelector).innerHTML = '';
-}
-*/
-
 
 function generateTags(){
 
@@ -169,13 +164,13 @@ function generateTags(){
       /* END LOOP: for each tag */
 
       html = html + linkHTML;
-      console.log('Czy to działa?');
+      console.log('Insert html link');
     }
 
     /* insert HTML of all the links into the tags wrapper */
 
     tagsWrapper.innerHTML = html;
-    console.log('A to?');
+    console.log('Insert html link into tags wrapper');
 
     /* END LOOP: for every article: */
   }
