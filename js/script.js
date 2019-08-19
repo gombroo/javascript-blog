@@ -238,7 +238,7 @@ function addClickListenersToTags(){
 
   /* find all links to tags */
 
-  const tagLinks = document.querySelectorAll('a[href="' + href + '"]'); // find all links with the same attribute as clicked link
+  const tagLinks = document.querySelectorAll('href');
 
   /* START LOOP: for each link */
 
