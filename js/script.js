@@ -55,7 +55,8 @@ const titleClickHandler = function(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post p.post-author';
 
 // function generateTitleLinks() {}
 function generateTitleLinks(customSelector = '') {
@@ -191,7 +192,7 @@ function tagClickHandler(event){
 
   /* [DONE] make a new constant "href" and read the attribute "href" of the clicked element */
 
-  const href = clickedElement.getAttribute('href'); // or this.getAttribute('href');?
+  const href = clickedElement.getAttribute('href');
   console.log('Read href attirbute of the clicked element');
 
   /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
@@ -255,3 +256,50 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+
+function generateAuthors(){
+
+  /* [DONE] find all authors */
+
+  const authors = document.querySelectorAll(optArticleAuthorSelector);
+  console.log('Find all authors: ', authors);
+
+  /* [DONE] START LOOP: for every author: */
+
+  for(let author of authors) {
+
+    /* [DONE] find author wrapper */
+
+    const authorWrapper = document.querySelector(optArticleAuthorSelector);
+    console.log('Find author wrapper:', authorWrapper);
+
+    /* make html variable with empty string */
+
+    let html = '';
+
+    /* get author from author-tag attribute */
+
+    const articleAuthor = author.getAttribute('data-author');
+    console.log('Get author from data-author attr:', articleAuthor);
+
+    /* generate HTML link of the author */
+
+    const authorHTML = '<a href="#' + author + '">' + author + '</a>';
+    console.log('Make link: ', authorHTML);
+
+    /* add generated code to html variable */
+
+    html = html + authorHTML;
+    console.log('Add code to html variable: ', html);
+
+    /* insert HTML of all the links into the author wrapper */
+
+    authorWrapper.innerHTML = html;
+    console.log('Insert html link into author wrapper', html);
+
+  /* END LOOP: for every author: */
+  }
+}
+
+generateAuthors();
