@@ -278,22 +278,23 @@ function generateAuthors(){
 
     let html = '';
 
-    /* get author from author-tag attribute */
+    /* [DONE] get author from data-author attribute */
 
     const articleAuthor = author.getAttribute('data-author');
     console.log('Get author from data-author attr:', articleAuthor);
 
-    /* generate HTML link of the author */
+    /* [DONE] generate HTML link of the author */
 
-    const authorHTML = '<a href="#' + author + '">' + author + '</a>';
+    const authorHTML = '<a href="#' + articleAuthor + '">' + articleAuthor + '</a>';
+    // const authorHTML = articleAuthor;
     console.log('Make link: ', authorHTML);
 
-    /* add generated code to html variable */
+    /* [DONE] add generated code to html variable */
 
     html = html + authorHTML;
     console.log('Add code to html variable: ', html);
 
-    /* insert HTML of all the links into the author wrapper */
+    /* [DONE] insert HTML of all the links into the author wrapper */
 
     authorWrapper.innerHTML = html;
     console.log('Insert html link into author wrapper', html);
