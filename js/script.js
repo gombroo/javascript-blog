@@ -212,19 +212,19 @@ addClickListenersToTags();
 function generateAuthors(){
 
   /* [DONE] find all authors */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(optArticleSelector); // search in .post
 
   /* [DONE] START LOOP: for every author: */
-  for(let article of articles) {
+  for(let article of articles) { // for each .post
 
     /* [DONE] find author wrapper */
-    const authorList = article.querySelector(optArticleAuthorSelector);
+    const authorWrapper = article.querySelector(optArticleAuthorSelector); // find empty html <p> tag to insert auhtor name
 
     /* make html variable with empty string */
-    let html = '';
+    let html = ''; // generate empty html string there
 
-    /* [DONE] get author from data-author attribute */
-    const articleAuthor = article.getAttribute('data-author');
+    /* [DONE] get author from data-author attribute assigned to article */
+    const articleAuthor = article.getAttribute('data-author'); // display articles assigned to author
 
     /* [DONE] generate HTML link of the author */
     const authorHTML = '<a href="#' + articleAuthor + '">' + articleAuthor + '</a>';
@@ -234,7 +234,7 @@ function generateAuthors(){
     html = html + authorHTML;
 
     /* [DONE] insert HTML of all the links into the author wrapper */
-    authorList.innerHTML = html;
+    authorWrapper.innerHTML = html;
 
   /* END LOOP: for every author: */
   }
@@ -258,7 +258,7 @@ function authorClickHandler(event){
   const author = href.replace('#', '');
 
   /* find all author links with class active */
-  const activeAuthorLinks = document.querySelectorAll('.post-author a.active');
+  const activeAuthorLinks = document.querySelectorAll('.post-author a.active'); // search author with class active
 
   /* START LOOP: for each active author link */
   for(let activeAuthorLink of activeAuthorLinks) {
@@ -270,10 +270,10 @@ function authorClickHandler(event){
   }
 
   /* find all author links with "href" attribute equal to the "href" constant */
-  const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+  const authorLinks = document.querySelectorAll('a[href="' + href + '"]'); // author name = href
 
   /* START LOOP: for each found author link */
-  for(let authorLink of authorLinks) {
+  for(let authorLink of authorLinks) { // find articles assigned to particular author
 
     /* add class active */
     authorLink.classList.add('active');
