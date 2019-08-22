@@ -43,7 +43,7 @@ const titleClickHandler = function(event){
 
 
 /* ------------------------------ */
-/* Generate title list with JS */
+/* Generate title links */
 /* ------------------------------ */
 
 const optArticleSelector = '.post',
@@ -106,13 +106,20 @@ function generateTitleLinks(customSelector = '') {
 generateTitleLinks();
 
 
+/* ------------------------------ */
+/* Generate tags */
+/* ------------------------------ */
+
 function generateTags(){
 
-  /* [DONE] find all articles */
-  const articles = document.querySelectorAll(optArticleSelector);
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
 
-  /* [DONE] START LOOP: for every article: */
-  for(let article of articles) {
+    /* [DONE] find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    /* [DONE] START LOOP: for every article: */
+    for(let article of articles) {
 
     /* [DONE] find tags wrapper */
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
@@ -135,6 +142,12 @@ function generateTags(){
       /* [DONE] add generated code to html variable */
       html = html + linkHTML;
 
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(linkHTML) == -1){
+
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
       /* END LOOP: for each tag */
     }
 
@@ -142,7 +155,13 @@ function generateTags(){
     tagsWrapper.innerHTML = html;
 
     /* END LOOP: for every article: */
-  }
+    }
+
+    /* [NEW] find list of tags in right column */
+    const tagList = document.querySelector('.tags');
+
+    /* [NEW] add html from allTags to tagList */
+    tagList.innerHTML = allTags.join(' ');
 }
 
 generateTags();
@@ -190,7 +209,6 @@ function tagClickHandler(event){
   generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
-
 function addClickListenersToTags(){
 
   /* find all links to tags */
@@ -208,6 +226,10 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
+
+/* ------------------------------ */
+/* Generate authors */
+/* ------------------------------ */
 
 function generateAuthors(){
 
@@ -285,7 +307,6 @@ function authorClickHandler(event){
   generateTitleLinks('[data-author="' + author + '"]');
 }
 
-
 function addClickListenersToAuthors() {
 
   /* find all links to authors */
@@ -302,3 +323,8 @@ function addClickListenersToAuthors() {
 }
 
 addClickListenersToAuthors();
+
+
+/* ------------------------------ */
+/* Generate tags in sidebar */
+/* ------------------------------ */
