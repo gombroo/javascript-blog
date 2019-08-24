@@ -51,7 +51,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post p.post-author',
-  optTagsListSelector = '.tags.list',
+  optTagsListSelector = '.tags .list',
   optCloudClassCount = '5',
   optCloudClassPrefix = 'tag-size-';
 
@@ -114,15 +114,14 @@ generateTitleLinks();
 
 /* [NEW] znajdz największa i najmniejszą liczbe wystapien danego tagu */
 function calculateTagsParams(tags){
+  console.log(calculateTagsParams);
 }
-calculateTagsParams();
+// calculateTagsParams();
 
 function calculateTagClass(count, params){
   const classNumber = Math.floor( ( (count - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
-
   return optCloudClassPrefix + classNumber;
 }
-calculateTagClass();
 
 function generateTags(){
 
