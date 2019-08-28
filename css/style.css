@@ -109,8 +109,13 @@ body {
 }
 
 /* Tags */
-.sidebar .tags li {
-  display: inline-block;
+.tags li {
+  display: inline;
+  line-height: 1.5;
+}
+
+.tags a {
+  text-decoration: none;
 }
 
 .tag-size-1 {
@@ -118,7 +123,7 @@ body {
 }
 
 .tag-size-2 {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .tag-size-3 {
@@ -126,11 +131,16 @@ body {
 }
 
 .tag-size-4 {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .tag-size-5 {
-  font-size: 45px;
+  font-size: 35px;
 }
+
+.tag-size-6 {
+  font-size: 40px;
+}
+
 
 /*# sourceMappingURL=style.css.map */
