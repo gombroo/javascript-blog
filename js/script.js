@@ -65,7 +65,8 @@ const titleClickHandler = function(event) {
 /* Generate title links */
 /* ------------------------------ */
 
-/* const optArticleSelector = '.post',
+/*
+  const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
@@ -74,7 +75,7 @@ const titleClickHandler = function(event) {
   optAuthorsListSelector = '.list.authors',
   optCloudClassCount = '5',
   optCloudClassPrefix = 'tag-size-';
-  */
+*/
 
 function generateTitleLinks(customSelector = '') {
 
@@ -226,7 +227,7 @@ function generateTags() {
   }
 
   /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector('.tags');
+  const tagList = document.querySelector(opt.tagsListSelector);
 
   /* [NEW] w ilu artykułach pojawia się najbardziej i najmniej popularny tag */
   const tagsParams = calculateTagsParams(allTags);
