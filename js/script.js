@@ -16,7 +16,8 @@ const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
-  tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML)
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+  authorCloudLink: Handlebars.compile(document.querySelector('#template-author-cloud-link').innerHTML)
 };
 
 /* ------------------------------ */
@@ -161,7 +162,7 @@ function calculateTagsParams(tags) {
 }
 
 function calculateTagClass(count, params) {
-  const classNumber = Math.floor(((count - params.min) / (params.max - params.min)) * opt.cloudClassCount + 1);
+  const classNumber = Math.floor(((count - params.min) / (params.max - params.min)) * (opt.cloudClassCount - 1) + 1);
   return opt.cloudClassPrefix + classNumber;
 }
 
@@ -334,8 +335,7 @@ addClickListenersToTags();
 /* ------------------------------ */
 
 /* [NEW] find max and min count of each author's appearance */
-
-function calculateAuthorsParams(authors) {
+/*function calculateAuthorsParams(authors) {
   const params = {
     max: 0,
     min: 999999
@@ -354,11 +354,13 @@ function calculateAuthorsParams(authors) {
   }
   return params;
 }
+*/
 
 function calculateAuthorClass(count, params) {
   const classNumber = Math.floor(((count - params.min) / (params.max - params.min)) * opt.cloudClassCount + 1);
   return opt.cloudClassPrefix + classNumber;
 }
+
 
 function generateAuthors() {
 
@@ -381,42 +383,62 @@ function generateAuthors() {
     const articleAuthor = article.getAttribute('data-author'); // display articles assigned to author
 
     /* [DONE] generate HTML link of the author */
-    const authorHTML = '<a href="#' + articleAuthor + '">' + articleAuthor + '</a>';
+    // const authorHTML = '<a href="#' + articleAuthor + '">' + articleAuthor + '</a>';
     // const authorHTML = articleAuthor; - no link
-    // const linkHTMLData = {id: articleAuthor, title: articleAuthor};
-    // const linkHTML = templates.authorLink(linkHTMLData);
+    const authorHTMLData = {
+      id: articleAuthor,
+      title: articleAuthor
+    };
+    const authorHTML = templates.authorLink(authorHTMLData);
 
     /* [DONE] add generated code to html variable */
     html = html + authorHTML;
 
     /* [NEW] check if this link is NOT already in allAuthors */
-    if (!Object.prototype.hasOwnProperty.call(allAuthors, articleAuthor)) {
+    if (!allAuthors[articleAuthor]) {
 
       /* [NEW] if not, add author to allAuthors object */
       allAuthors[articleAuthor] = 1;
     } else {
+
       /* [NEW] if yes, increase the counter by 1 */
       allAuthors[articleAuthor]++;
     }
+
+    /* [DONE] insert HTML of all the links into the author wrapper sidebar*/
     authorWrapper.innerHTML = html;
   }
-
-  /* [DONE] insert HTML of all the links into the author wrapper sidebar*/
-
   /* END LOOP: for every author: */
 }
 
 /* [NEW] find list of authors in right column */
-const authorList = document.querySelector('.authors');
+const authorList = document.querySelector(opt.authorsListSelector);
 
 /* [NEW] in which articles the most and less popular author appears */
 // const authorsParams = calculateAuthorsParams(allAuthors);
 
 /* [NEW] create variable for all links in HTML code */
-let allAuthorsHTML = '';
+// let allAuthorsHTML = '';
+const allAuthorsData = {
+   authors: []
+ };
+
+ /* [NEW] START LOOP: for each author in allAuhtorsHTML */
+ for (let author in allAuthors) {
+
+allAuthorsData.authors.push({
+  author: articleAuthor,
+});
+
+/* [NEW] END LOOP: for each author in allAuthors */
+
 
 /* [NEW] add html from allAuthorsHTML to authorList */
-authorList.innerHTML = allAuthorsHTML;
+// authorList.innerHTML = allAuthorsHTML;
+
+authorList.innerHTML = templates.authorCloudLink(allAuthorsData);
+console.log(allAuthorsData);
+}
 
 generateAuthors();
 
@@ -433,10 +455,11 @@ function authorClickHandler(event) {
   const href = clickedElement.getAttribute('href');
 
   /* make a new constant "author" and extract author from the "href" constant */
-  const author = href.replace('#', '');
+  const author = href.replace('#author-', '');
 
   /* find all author links with class active */
-  const activeAuthorLinks = document.querySelectorAll('.post-author a.active'); // search author with class active
+  // const activeAuthorLinks = document.querySelectorAll('.post-author a.active'); // search author with class active
+  const activeAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
 
   /* START LOOP: for each active author link */
   for (let activeAuthorLink of activeAuthorLinks) {
@@ -466,7 +489,7 @@ function authorClickHandler(event) {
 function addClickListenersToAuthors() {
 
   /* find all links to authors */
-  const authorLinks = document.querySelectorAll('.post-author a');
+  const authorLinks = document.querySelectorAll('a[href^="#author-"]');
 
   /* START LOOP: for each author */
   for (let authorLink of authorLinks) {
