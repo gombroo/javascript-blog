@@ -109,7 +109,10 @@ body {
 }
 
 .post-author {
-  font-style: italic;
+  font-style: normal;
+  li {
+    list-style: none;
+  }
 }
 
 .post-tags {
@@ -117,4 +120,33 @@ body {
   p {
     margin: 0 10px 0 0;
   }
+}
+
+/* Tags */
+
+.sidebar .tags li {
+  display: inline-block;
+  a {
+    text-decoration: none;
+  }
+}
+
+.tag-size-1 {
+  font-size: 15px;
+}
+
+.tag-size-2 {
+  font-size: 25px;
+}
+
+.tag-size-3 {
+  font-size: 40px;
+}
+
+.tag-size-4 {
+  font-size: 45px;
+}
+
+.tag-size-5 {
+  font-size: 50px;
 }
