@@ -1,5 +1,33 @@
 'use strict';
 
+/*
+const opts = {
+  tagSizes: {
+    count: 5,
+    classPrefix: 'tag-size-',
+  },
+};
+
+const select = {
+  all: {
+    articles: '.post',
+    linksTo: {
+      tags: 'a[href^="#tag-"]',
+      authors: 'a[href^="#author-"]',
+    },
+  },
+  article: {
+    tags: '.post-tags .list',
+    author: '.post-author',
+  },
+  listOf: {
+    titles: '.titles',
+    tags: '.tags.list',
+    authors: '.authors.list',
+  },
+};
+ */
+
 const opt = {
   articleSelector: '.post',
   titleSelector: '.post-title',
@@ -197,7 +225,7 @@ function generateTags() {
 
       const linkHTMLData = {
         id: tag,
-        title: tag
+        title: tag,
       };
       const linkHTML = templates.tagLink(linkHTMLData);
 
@@ -205,8 +233,9 @@ function generateTags() {
       html = html + linkHTML;
 
       /* [NEW] check if this link is NOT already in allTags */
-      // if (Object.prototype.hasOwnProperty.call(obj, prop)) // works
-      //if (!Object.prototype.hasOwnProperty.call(allTags, tag)) // works
+      // if(Object.prototype.hasOwnProperty.call(obj, prop)) // works
+      // if(!Object.prototype.hasOwnProperty.call(allTags, tag)) // works
+      // if(!allTags.hasOwnProperty(tag)) // jeśli allTags NIE MA klucza tag
 
       if (!allTags[tag]) {
 
@@ -233,12 +262,13 @@ function generateTags() {
   /* [NEW] w ilu artykułach pojawia się najbardziej i najmniej popularny tag */
   const tagsParams = calculateTagsParams(allTags);
 
-  /* [NEW] create variable for all links in HTML code */
-  // let allTagsHTML = '';
+  /* [NEW] create variable for all links in HTML code
+  = generate HTML code for tag links in the sidebar */
 
+  // let allTagsHTML = ''; // tu przechowujemy kod wszystkich linków
   const allTagsData = {tags: []};
 
-  /* [NEW] START LOOP: for each tag in allTagsHTML */
+  /* [NEW] START LOOP: for each tag in allTags object */
   for (let tag in allTags) {
 
     /* [DONE] generate code of a link and add it to allTagsHTML */
@@ -249,9 +279,9 @@ function generateTags() {
     // 4. const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>';
 
     // const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '" > ' + tag + ' </a></li > ';
-    // allTagsHTML += tagLinkHTML;
 
-    allTagsData.tags.push({
+    // allTagsHTML += tagLinkHTML; // doklejanie kodu kolejnego linka do allTagsHTML
+    allTagsData.tags.push({ // zamiast tego do tablicy dodajemy kolejny obiekt
       tag: tag,
       count: allTags[tag],
       className: calculateTagClass(allTags[tag], tagsParams)
@@ -261,8 +291,8 @@ function generateTags() {
   }
 
   /* [NEW] add html from allTagsHTML to tagList */
-  // tagList.innerHTML = allTagsHTML;
 
+  // tagList.innerHTML = allTagsHTML; // nie mamy już allTagsHTML
   tagList.innerHTML = templates.tagCloudLink(allTagsData);
   console.log(allTagsData);
 }
@@ -342,7 +372,7 @@ function calculateAuthorClass(count, params) {
 function generateAuthors() {
 
   /* create a new variable allAuthors with an empty object */
-  let allAuthors = [];
+  let allAuthors = {};
 
   /* find all authors */
   const articles = document.querySelectorAll(opt.articleSelector); // search in .post
@@ -357,7 +387,7 @@ function generateAuthors() {
     let html = '';
 
     /* get author from data-author attribute assigned to article */
-    const articleAuthor = article.getAttribute('data-author'); // display articles assigned to author
+    const articleAuthor = article.getAttribute('data-author');
 
     /* generate HTML link of the author */
     // const authorHTML = '<a href="#' + articleAuthor + '">' + articleAuthor + '</a>';
